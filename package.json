@@ -19,5 +19,8 @@
 		"cjs": {
 			"namedExports": true
 		}
+	},
+	"dependencies": {
+		"deferrant": "^1.2.2"
 	}
 }

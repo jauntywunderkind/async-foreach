@@ -4,3 +4,4 @@ export async function * asyncMap( asyncIterator, fn){
 		yield fn( val, i++, asyncIterator)
 	}
 }
+export default asyncMap

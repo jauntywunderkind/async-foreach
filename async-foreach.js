@@ -1,33 +1,20 @@
 import Deferrant from "deferrant"
 
-export const Aborted= Object.freeze({})
-
 export async function asyncForEach( asyncIterator, fn, options){
-	const signal= options&& options.signal
+	// 
 	const defer= Deferrant( signal&& { signal})
+	// handle abort
+	options&& options.signal&& options.signal.addEventListener("abort", abort=> defer.reject(abort))
+
 	let i= 0
-	async function asyncForEachNext( value){
+	for await( const val of asyncIterator){
 		if( signal&& signal.aborted){
-			defer.reject( Aborted)
-			return
+			// bail out of we aborted
+			return defer
 		}
-		let cursor= await asyncIterator.next()
-		if( signal&& signal.aborted){
-			defer.reject( Aborted)
-			return
-		}
-		try{
-			fn( cursor.value, i++, asyncIterator)
-		}catch(err){
-			defer.reject( err)
-		}
-		if( cursor.done){
-			defer.resolve()
-			return
-		}
-		asyncForEachNext( asyncIterator.next())
+		fn( val, i++, asyncIterator)
 	}
-	asyncForEachNext()
-	return defer.promise
+	defer.resolve()
+	return defer
 }
 export default asyncForEach
