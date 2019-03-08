@@ -1,10 +1,9 @@
 import Deferrant from "deferrant"
 
 export async function asyncForEach( asyncIterator, fn, options){
+	const signal= options&& options.signal;
 	// at the end, we either resolve undefined, or throw any seen error/abort
 	const defer= Deferrant( signal&& { signal})
-
-	const signal= options&& options.signal
 	// check for abort right off the bat
 	if( signal&& signal.aborted){
 		// bail out of we aborted
@@ -14,8 +13,10 @@ export async function asyncForEach( asyncIterator, fn, options){
 	// handle abort
 	signal&& signal.addEventListener("abort", abort=> defer.reject(abort))
 
+	let i= 0
+
 	// unleashing zalgo here: change mode & dispatch synchronously if our input is synchronous
-	if( !(Symbol.asyncIterator on asyncIterator)){
+	if( !(Symbol.asyncIterator in asyncIterator)&& !( options&& options.noSync)){
 		for( const val of asyncIterator){
 			if( signal&& signal.aborted){
 				return defer
@@ -30,7 +31,6 @@ export async function asyncForEach( asyncIterator, fn, options){
 	}
 
 	// start iterating
-	let i= 0
 	for await( const val of asyncIterator){
 		if( signal&& signal.aborted){
 			// bail out - we've aborted

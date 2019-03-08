@@ -22,5 +22,8 @@
 	},
 	"dependencies": {
 		"deferrant": "^1.2.2"
+	},
+	"devDependencies": {
+		"tape": "^4.10.1"
 	}
 }
