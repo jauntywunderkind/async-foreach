@@ -1,5 +1,5 @@
 {
-	"name": "async-foreach",
+	"name": "foreach-star",
 	"version": "1.0.0",
 	"description": "Async & cancellable forEach and map",
 	"main": "index.js",
