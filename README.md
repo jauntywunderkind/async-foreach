@@ -1,3 +1,5 @@
-# async-foreach
+# async-iter-static
 
-> Async & cancellable forEach and map
+> Common Class methods for AsyncIterables.
+
+
