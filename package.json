@@ -1,5 +1,5 @@
 {
-	"name": "foreach-star",
+	"name": "async-iter-static",
 	"version": "1.0.0",
 	"description": "Async & cancellable forEach and map",
 	"main": "index.js",
@@ -8,12 +8,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://archive.eldergods.com/async-foreach"
+		"url": "https://archive.eldergods.com/async-iter-static"
 	},
 	"keywords": [],
 	"author": "jauntywunderkind",
 	"license": "MIT",
-	"module": "async-foreach.js",
+	"module": "async-iter-static.js",
 	"esm": true,
 	"@std/esm": {
 		"cjs": {
