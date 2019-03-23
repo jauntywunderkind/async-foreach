@@ -1,5 +1,5 @@
 "use module"
-import Deferrant from "deferrant"
+import Deferrant from "deferrant/deferrant.js"
 
 export async function asyncForEach( asyncIterator, fn, options){
 	const signal= options&& options.signal;

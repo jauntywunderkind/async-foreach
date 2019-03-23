@@ -2,10 +2,10 @@
 	"name": "async-iter-static",
 	"version": "1.0.1",
 	"description": "Common Class methods for AsyncIterables.",
-	"main": "index.js",
+	"main": "async-iter-static.js",
 	"type": "module",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "node -r esm .test"
 	},
 	"repository": {
 		"type": "git",
@@ -16,15 +16,11 @@
 	"license": "MIT",
 	"module": "async-iter-static.js",
 	"esm": true,
-	"@std/esm": {
-		"cjs": {
-			"namedExports": true
-		}
-	},
 	"dependencies": {
 		"deferrant": "^1.2.2"
 	},
 	"devDependencies": {
+		"esm": "^3.1.4",
 		"tape": "^4.10.1"
 	}
 }

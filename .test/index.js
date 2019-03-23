@@ -1,2 +1,3 @@
-import { * as map } from "./map.js"
-import ( * as foreach } from "./foreach.js"
+"use module"
+import {} from "./map.js"
+import {}  from "./forEach.js"

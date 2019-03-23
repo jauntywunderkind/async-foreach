@@ -1,6 +1,7 @@
+"use module"
 import tape from "tape"
 
-import forEach from "../async-foreach.js"
+import forEach from "../forEach.js"
 
 tape( "async foreach 1", async function( t){
 	t.plan(6)

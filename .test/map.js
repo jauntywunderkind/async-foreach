@@ -1,6 +1,7 @@
+"use module"
 import tape from "tape"
 
-import map from "../async-map.js"
+import map from "../map.js"
 
 tape( "async map 1", async function( t){
 	t.plan(6)
