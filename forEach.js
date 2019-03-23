@@ -1,3 +1,4 @@
+"use module"
 import Deferrant from "deferrant"
 
 export async function asyncForEach( asyncIterator, fn, options){

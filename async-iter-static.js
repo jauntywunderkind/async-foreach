@@ -1,3 +1,4 @@
+"use module"
 import forEach from "./forEach.js"
 import map from "./map.js"
 
