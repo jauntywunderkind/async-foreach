@@ -12,12 +12,13 @@ export async function asyncForEach( asyncIterator, fn, options){
 	}
 
 	// handle abort
-	signal&& signal.addEventListener("abort", abort=> defer.reject(abort))
+	signal&& signal.addEventListener( "abort", abort=> defer.reject( abort))
 
 	let i= 0
 
 	// unleashing zalgo here: change mode & dispatch synchronously if our input is synchronous
 	if( !(Symbol.asyncIterator in asyncIterator)&& !( options&& options.noSync)){
+		// synchronous iteration
 		for( const val of asyncIterator){
 			if( signal&& signal.aborted){
 				return defer
@@ -32,17 +33,22 @@ export async function asyncForEach( asyncIterator, fn, options){
 	}
 
 	// start iterating
-	for await( const val of asyncIterator){
-		if( signal&& signal.aborted){
-			// bail out - we've aborted
-			return defer
+	try{
+		for await( const val of asyncIterator){
+			if( signal&& signal.aborted){
+				// bail out - we've aborted. "handle abort" above will reject
+				return defer
+			}
+			// run this iteration
+			const output= fn( val, i++, asyncIterator)
+			// in await mode, we let the transform return before continuing
+			if( options&& options.await){
+				await output
+			}
 		}
-		// run this iteration
-		const output= fn( val, i++, asyncIterator)
-		// in await mode, we let the transform return before continuing
-		if( options&& options.await){
-			await output
-		}
+	}catch(ex){
+		// either asyncIterator threw, or fn threw
+		defer.reject( ex)
 	}
 	// good we suceeded
 	defer.resolve()
